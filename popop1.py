@@ -25,23 +25,25 @@ def target(x1,y2):
 x =  (display_width * 0.5)
 y = (display_height * 0.5)
 
-
 x1 = (display_width * 0.9)
 y1= (display_height * 0.1)
 x_change = 0
-x2_change = 0
-y2_change = 0
+x1_change = 0
+y1_change = 0
 men_speed = 0
 target_speed = 0
-gameDisplay.fill(white)
-
+spawn = x1 = random.randint(0,1300)
+       
 
 while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
-            
+
         if event.type == pygame.KEYDOWN:
+            if event.type == pygame.K_SPACE:
+                spawn = True
+
             if event.key == pygame.K_a:
                 x_change = -5
             elif event.key == pygame.K_d:
@@ -49,10 +51,16 @@ while not crashed:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a or event.key == pygame.K_d:
                 x_change = 0
-        if event.type == pygame.K_SPACE:
-            spawn = True  
+
+        
+    if spawn == True:
+         
+        x1 = random.randint(0,1300)
+        y1 = random.randint(0,100)
+        spawn = False
 
     x += x_change
+    gameDisplay.fill(white)
     men(x)
     target (x1,y1)
     pygame.display.update()
